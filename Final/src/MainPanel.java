@@ -33,20 +33,6 @@ public MainPanel()
 	 public AlphabetLearningPanel()
 	{
 		 tabbedPane = new JTabbedPane();
-		 ViewAllPanel viewall = new ViewAllPanel();
-		 tabbedPane.add("View All",viewall);
-		 add(tabbedPane);
-	}
-}
- class ViewAllPanel extends JPanel
- {
-	 public ViewAllPanel()
-	 {
-		JLabel[] letterlabels = new JLabel[26];
-		Color[] letterColors = new Color[26];
-		setBackground(Color.decode("#F6904E"));
-		setBorder(new EmptyBorder(12,12,12,12));
-		 setLayout(new GridLayout(4,7 ,3,3));
 		 ArrayList<String> letters = new ArrayList<String>();
 		  for (char chare = 'A'; chare <='Z'; chare++)
 		  {
@@ -54,7 +40,82 @@ public MainPanel()
 			  
 		  }
 		 
-		  for(int i = 0; i<26;i++)
+		 
+		 ViewAllPanel viewall = new ViewAllPanel(letters);
+		 FlashCardsPanel flashcards = new FlashCardsPanel(letters);
+		 tabbedPane.add("View All",viewall);
+		 tabbedPane.add("FlashCard", flashcards);
+		 add(tabbedPane);
+	}
+}
+ class FlashCardsPanel extends JPanel implements ActionListener
+ {  CardLayout card;  
+ 
+ Container box = Box.createVerticalBox();
+ JButton nextBtn,previousBtn;
+ JPanel cards;
+	 public FlashCardsPanel(ArrayList<String> letters)
+	 {
+		  cards = new JPanel();
+		 card=new CardLayout(40,30);  
+		 cards.setLayout(card);
+		 
+		 for(String letter:letters)
+		 {
+			
+			cards.add(new SingleCardPanel(letter));
+		 }
+		 box.add(cards);
+		 JPanel btnPanel= new JPanel();
+		 nextBtn = new JButton("Next");
+		 previousBtn = new JButton("Previous");
+		 nextBtn.addActionListener(this);
+		 previousBtn.addActionListener(this);
+		 btnPanel.add(previousBtn);
+		btnPanel.add(nextBtn);
+		box.add(btnPanel);
+		add(box);
+	 }
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		Object src = e.getSource();
+		   if(src == nextBtn)
+		   {
+			   card.next(cards);
+		   }else if(src == previousBtn)
+		   {
+			   card.previous(cards);
+		   }
+		
+	}
+ }
+ class SingleCardPanel extends JPanel
+ {
+	 Container verticalbox = Box.createVerticalBox();
+	 JLabel letterCard;
+	 Font letterFont = new Font("san-serif",Font.BOLD, 195);
+ 	 public SingleCardPanel(String letter)
+	 {
+		 letterCard = new JLabel(letter);
+		 letterCard.setForeground(Color.decode("#884EF6"));
+		 letterCard.setFont(letterFont);
+		 letterCard.setBackground(Color.white);
+		 letterCard.setOpaque(true);
+		 letterCard.setBorder(new EmptyBorder(35,55,35,55));
+		 verticalbox.add(letterCard);
+		 add(verticalbox);
+	 }
+ }
+ class ViewAllPanel extends JPanel
+ {
+	 public ViewAllPanel(ArrayList<String> letters)
+	 {
+		JLabel[] letterlabels = new JLabel[26];
+		Color[] letterColors = new Color[26];
+		setBackground(Color.decode("#F6904E"));
+		setBorder(new EmptyBorder(12,12,12,12));
+		 setLayout(new GridLayout(4,7 ,3,3));
+		 for(int i = 0; i<26;i++)
 			  
 		  {
 			  letterlabels[i] = new JLabel(letters.get(i));
@@ -76,6 +137,7 @@ public MainPanel()
 		  }
 	 }
  }
+ 
  class StartGamePanel extends JPanel implements ActionListener
 {
     JButton submitBtn;
