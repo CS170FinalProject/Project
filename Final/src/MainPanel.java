@@ -137,6 +137,8 @@ public MainPanel()
 		 letterCard.setBackground(Color.white);
 		 letterCard.setOpaque(true);
 		 letterCard.setBorder(new EmptyBorder(35,55,35,55));
+		 letterCard.setHorizontalAlignment(SwingConstants.CENTER);
+		 letterCard.setVerticalAlignment(SwingConstants.CENTER);
 		 verticalbox.add(letterCard);
 		 add(verticalbox);
 	 }
@@ -163,7 +165,8 @@ public MainPanel()
 		  {
 			 letterlabels[i].setBorder(new EmptyBorder(20,20,20,20));
 			 letterlabels[i].setFont(letterFont);
-		
+		letterlabels[i].setHorizontalAlignment(SwingConstants.CENTER);
+		letterlabels[i].setVerticalAlignment(SwingConstants.CENTER);
 			  letterlabels[i].setForeground(new Color(192,9,250));
 			  letterlabels[i].setBackground(Color.WHITE);
 			  letterlabels[i].setOpaque(true);
