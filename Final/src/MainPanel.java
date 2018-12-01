@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
-import javax.swing.*;
+
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
@@ -15,23 +15,27 @@ public class MainPanel extends JPanel
 {
 	CardLayout card; 
 	Container c;  
+	
+	
 public MainPanel()
   {
 	 
-      card=new CardLayout();  
+      //card=new CardLayout();  
 //create CardLayout object with 40 hor space and 30 ver space  
-     setLayout(card); 
-     add(new AlphabetLearningPanel());
-     add(new StartGamePanel());
+	setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+	setBorder(new EmptyBorder(20,15,20,15));
+   add(new AlphabetLearningPanel());
      
-      
+    
   }
 }
  class AlphabetLearningPanel extends JPanel
 {
 	 private JTabbedPane tabbedPane;
+	
 	 public AlphabetLearningPanel()
 	{
+		 setLayout(new BorderLayout());
 		 tabbedPane = new JTabbedPane();
 		 ArrayList<String> letters = new ArrayList<String>();
 		  for (char chare = 'A'; chare <='Z'; chare++)
@@ -45,8 +49,11 @@ public MainPanel()
 		 FlashCardsPanel flashcards = new FlashCardsPanel(letters);
 		 tabbedPane.add("View All",viewall);
 		 tabbedPane.add("FlashCard", flashcards);
-		 add(tabbedPane);
+		 add(tabbedPane,BorderLayout.NORTH);
+		
+		 
 	}
+	
 }
  class FlashCardsPanel extends JPanel implements ActionListener
  {  CardLayout card;  
@@ -54,6 +61,7 @@ public MainPanel()
  Container box = Box.createVerticalBox();
  JButton nextBtn,previousBtn;
  JPanel cards;
+ int count = 1;
 	 public FlashCardsPanel(ArrayList<String> letters)
 	 {
 		  cards = new JPanel();
@@ -71,6 +79,7 @@ public MainPanel()
 		 previousBtn = new JButton("Previous");
 		 nextBtn.addActionListener(this);
 		 previousBtn.addActionListener(this);
+		 previousBtn.setEnabled(false);
 		 btnPanel.add(previousBtn);
 		btnPanel.add(nextBtn);
 		box.add(btnPanel);
@@ -82,9 +91,35 @@ public MainPanel()
 		   if(src == nextBtn)
 		   {
 			   card.next(cards);
+			   count++;
+			   if(count == 1)
+				 {
+					 previousBtn.setEnabled(false);
+				 }else {
+					 previousBtn.setEnabled(true);
+				 }
+			   if(count == 26)
+			   {
+				   nextBtn.setEnabled(false);
+			   }else {
+				   nextBtn.setEnabled(true);
+			   }
 		   }else if(src == previousBtn)
 		   {
 			   card.previous(cards);
+			   count--;
+			   if(count == 1)
+				 {
+					 previousBtn.setEnabled(false);
+				 }else {
+					 previousBtn.setEnabled(true);
+				 }
+			   if(count == 26)
+			   {
+				   nextBtn.setEnabled(false);
+			   }else {
+				   nextBtn.setEnabled(true);
+			   }
 		   }
 		
 	}

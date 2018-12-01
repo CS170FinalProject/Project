@@ -51,18 +51,23 @@ public class AlphabetLearning implements ActionListener {
     JButton buttonClear = new JButton("CLR");
     JButton buttonDelete = new JButton("DEL");
     JButton buttonExit = new JButton("Exit");
-    
+    boolean visible = false;
 
     //JButton buttonA = new JButton("A");
    // JButton buttonB = new JButton("B");
    // ;
 
-    AlphabetLearning() {
+    public AlphabetLearning(boolean visible) {
         prepareGUI();
         addComponents();
         addActionEvent();
+        this.visible = visible;
+        frame.setVisible(visible);
     }
-
+public void closeThis()
+{
+ frame.dispose();	
+}
     public void prepareGUI() {
         frame = new JFrame();
         frame.setTitle("Alphabet Learning");
@@ -71,8 +76,8 @@ public class AlphabetLearning implements ActionListener {
         frame.getContentPane().setBackground(Color.black);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     public void addComponents() {
@@ -179,11 +184,16 @@ public class AlphabetLearning implements ActionListener {
         buttonAns.setFont(new Font("Arial", Font.BOLD, 12));
         buttonAns.setBackground(Color.red);
         buttonAns.setForeground(Color.white);
+        buttonAns.setOpaque(true);
+        buttonAns.setBorderPainted(false);
+        buttonAns.setText("Ans");
         frame.add(buttonAns);
 
         buttonExit.setBounds(300, 110, 70, 40);
         buttonExit.setFont(new Font("Arial", Font.BOLD, 20));
         buttonExit.setBackground(new Color(239, 188, 2));
+        buttonExit.setOpaque(true);
+        buttonExit.setBorderPainted(false);
         frame.add(buttonExit);
         
         buttonQ.setBounds(80, 170, 60, 40);
@@ -222,6 +232,8 @@ public class AlphabetLearning implements ActionListener {
         buttonClear.setFont(new Font("Arial", Font.BOLD, 12));
         buttonClear.setBackground(Color.red);
         buttonClear.setForeground(Color.white);
+        buttonClear.setOpaque(true);
+        buttonClear.setBorderPainted(false);
         frame.add(buttonClear);
 
         buttonDelete.setBounds(150, 110, 60, 40);
@@ -272,7 +284,7 @@ public class AlphabetLearning implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         if(source == buttonExit){
-			System.exit(0);
+			frame.dispose();
 		}
         else if (source == onRadioButton) {
             enable();//Calling enable() function
