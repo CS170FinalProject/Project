@@ -25,7 +25,7 @@ public MainPanel()
 	setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 	setBorder(new EmptyBorder(20,15,20,15));
    add(new AlphabetLearningPanel());
-     
+     setBackground(Color.decode("#27083F"));
     
   }
 }
@@ -47,10 +47,11 @@ public MainPanel()
 		 
 		 ViewAllPanel viewall = new ViewAllPanel(letters);
 		 FlashCardsPanel flashcards = new FlashCardsPanel(letters);
-		 tabbedPane.add("View All",viewall);
 		 tabbedPane.add("FlashCard", flashcards);
-		 add(tabbedPane,BorderLayout.NORTH);
+		 tabbedPane.add("View All",viewall);
 		
+		 add(tabbedPane,BorderLayout.NORTH);
+		 setBackground(Color.decode("#27083F"));
 		 
 	}
 	
@@ -64,7 +65,8 @@ public MainPanel()
  int count = 1;
 	 public FlashCardsPanel(ArrayList<String> letters)
 	 {
-		  cards = new JPanel();
+		 setBackground(Color.decode("#27083F"));
+		 cards = new JPanel();
 		 card=new CardLayout(40,30);  
 		 cards.setLayout(card);
 		 
@@ -80,6 +82,7 @@ public MainPanel()
 		 nextBtn.addActionListener(this);
 		 previousBtn.addActionListener(this);
 		 previousBtn.setEnabled(false);
+		 //cards.setBackground(Color.decode("#27083F"));
 		 btnPanel.add(previousBtn);
 		btnPanel.add(nextBtn);
 		box.add(btnPanel);
@@ -165,6 +168,7 @@ public MainPanel()
 		  {
 			 letterlabels[i].setBorder(new EmptyBorder(20,20,20,20));
 			 letterlabels[i].setFont(letterFont);
+			 //center the text inside the label
 		letterlabels[i].setHorizontalAlignment(SwingConstants.CENTER);
 		letterlabels[i].setVerticalAlignment(SwingConstants.CENTER);
 			  letterlabels[i].setForeground(new Color(192,9,250));
