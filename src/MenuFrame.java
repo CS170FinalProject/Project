@@ -15,8 +15,8 @@ public class MenuFrame extends JFrame implements ActionListener
 {
 	Thread LearningThread = new LearningThread(false);
 	Thread PractisingThread = new PractisingThread(false);
-	JPanel panel = new MenuPanel(),
-			image = new ImagePanel();
+	JPanel panel = new MenuPanel();
+			
 	JLabel label = new JLabel(" Alphabet Learning"),imageLabel;
 	Color btnColor = Color.decode("#F27798"),
 			bgColor = Color.decode("#413E8A"),
@@ -130,25 +130,5 @@ public class MenuFrame extends JFrame implements ActionListener
 		 
 	 }
  }
- class ImagePanel extends JPanel
  
- {
-	 URL imageUrl;
-	 Image img;
-	 Toolkit tk = Toolkit.getDefaultToolkit();
-	 public ImagePanel()
-	 {
-		try {
-			imageUrl = new URL("https://image.freepik.com/free-vector/english-alphabet-fonts-in-different-colors_1308-4781.jpg");
-			img = tk.getImage(imageUrl);
-			
-		} catch (MalformedURLException e) {}
-	 }
-	 public void paintComponent(Graphics g)
-			 {
-		 super.paintComponent(g);
-		  	Graphics2D gg = (Graphics2D) g;
-		  	gg.drawImage(img,640,10,this);
-			 }
- }
  
