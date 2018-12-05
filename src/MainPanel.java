@@ -1,5 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.AudioSystem;
+
 
 
 import javax.swing.border.Border;
@@ -127,14 +131,22 @@ public MainPanel()
 		
 	}
  }
- class SingleCardPanel extends JPanel
+ class SingleCardPanel extends JPanel implements ActionListener
  {
 	 Container verticalbox = Box.createVerticalBox();
 	 JLabel letterCard;
+	 JButton soundBtn;
 	 Font letterFont = new Font("san-serif",Font.BOLD, 195);
+	 String letter;
  	 public SingleCardPanel(String letter)
+ 	   
 	 {
-		 letterCard = new JLabel(letter);
+ 		 this.letter = letter;
+		 soundBtn = new JButton("Play Sound");
+		 soundBtn.addActionListener(this);
+		 soundBtn.setHorizontalAlignment(SwingConstants.CENTER);
+		 verticalbox.add(soundBtn);
+ 		 letterCard = new JLabel(letter);
 		 letterCard.setForeground(Color.decode("#884EF6"));
 		 letterCard.setFont(letterFont);
 		 letterCard.setBackground(Color.white);
@@ -145,6 +157,34 @@ public MainPanel()
 		 verticalbox.add(letterCard);
 		 add(verticalbox);
 	 }
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		Object src = e.getSource();
+		if(src == soundBtn)
+		{
+		String soundName ="sounds/"+ this.letter.toLowerCase()+".wav";
+		playSound(soundName);
+		System.out.println(soundName);
+		}
+		
+	}
+	public void playSound(String soundName)
+	 {
+	   try 
+	   {
+		  
+		    AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(this.getClass().getResourceAsStream(soundName));
+		    Clip clip = AudioSystem.getClip( );
+		    clip.open(audioInputStream);
+		    clip.start( );
+	   }
+		   catch(Exception ex)
+		   {
+		     System.out.println("Error with playing sound.");
+		     ex.printStackTrace( );
+		   }
+	 
+ }
  }
  class ViewAllPanel extends JPanel
  {
