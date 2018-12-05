@@ -9,16 +9,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.net.*;
 
 public class MenuFrame extends JFrame implements ActionListener
 {
 	Thread LearningThread = new LearningThread(false);
 	Thread PractisingThread = new PractisingThread(false);
-	JPanel panel = new MenuPanel();
-	JLabel label = new JLabel(" Alphabet Learning");
+	JPanel panel = new MenuPanel(),
+			image = new ImagePanel();
+	JLabel label = new JLabel(" Alphabet Learning"),imageLabel;
 	Color btnColor = Color.decode("#F27798"),
 			bgColor = Color.decode("#413E8A"),
 			fontColor = Color.decode("#ECF5FA");
+	ImageIcon imageIcon = new ImageIcon(this.getClass().getResource("menuImage.jpg"));
 	
 	//String[] options = {"Learning","Practising","Playing the Game"};
 	//JList list = new JList();
@@ -30,7 +33,7 @@ public class MenuFrame extends JFrame implements ActionListener
 	public MenuFrame()
 	{
 		 setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		 setSize(new Dimension(350,450));
+		 setSize(new Dimension(550,1450));
 		MenuConpoment();
 		centerWindow(this);
 		LearningThread.start();
@@ -40,6 +43,9 @@ public class MenuFrame extends JFrame implements ActionListener
 	public void MenuConpoment()
 	{
 	    panel.setBackground(bgColor); 
+	    imageLabel = new JLabel(imageIcon);
+	    imageLabel.setAlignmentX(CENTER_ALIGNMENT);
+	    verticalbox.add(imageLabel);
 	    Font titlefont = new Font("san-serif",Font.BOLD,41);
 	   Font btnFont = new Font("san-serif",Font.PLAIN,26);
 		
@@ -123,5 +129,26 @@ public class MenuFrame extends JFrame implements ActionListener
 	 {
 		 
 	 }
+ }
+ class ImagePanel extends JPanel
+ 
+ {
+	 URL imageUrl;
+	 Image img;
+	 Toolkit tk = Toolkit.getDefaultToolkit();
+	 public ImagePanel()
+	 {
+		try {
+			imageUrl = new URL("https://image.freepik.com/free-vector/english-alphabet-fonts-in-different-colors_1308-4781.jpg");
+			img = tk.getImage(imageUrl);
+			
+		} catch (MalformedURLException e) {}
+	 }
+	 public void paintComponent(Graphics g)
+			 {
+		 super.paintComponent(g);
+		  	Graphics2D gg = (Graphics2D) g;
+		  	gg.drawImage(img,640,10,this);
+			 }
  }
  
