@@ -11,10 +11,9 @@ public class AlphabetLearning implements ActionListener {
    //Creating variables for our calculations
     double number, answer;
     int calculation;
-    String alphaStr = "ABCDEFG";
+    String alphaStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     JFrame frame;
-    
    // JLabel label = new JLabel();
     JTextField textField = new JTextField();
     JTextField textField2 = new JTextField();
@@ -44,40 +43,36 @@ public class AlphabetLearning implements ActionListener {
     JButton buttonU = new JButton("U");
     JButton buttonV = new JButton("V");
     JButton buttonW= new JButton("W");
-   /* JButton buttonV = new JButton("X");
-    JButton buttonV = new JButton("Y");
-    JButton buttonV = new JButton("Z");*/
+    JButton buttonX = new JButton("X");
+    JButton buttonY = new JButton("Y");
+    JButton buttonZ = new JButton("Z");
     JButton buttonAns = new JButton("Ans");
     JButton buttonClear = new JButton("CLR");
     JButton buttonDelete = new JButton("DEL");
     JButton buttonExit = new JButton("Exit");
-    boolean visible = false;
+    
 
     //JButton buttonA = new JButton("A");
    // JButton buttonB = new JButton("B");
    // ;
 
-    public AlphabetLearning(boolean visible) {
+    AlphabetLearning(boolean visible) {
         prepareGUI();
         addComponents();
         addActionEvent();
-        this.visible = visible;
         frame.setVisible(visible);
     }
-public void closeThis()
-{
- frame.dispose();	
-}
+
     public void prepareGUI() {
         frame = new JFrame();
         frame.setTitle("Alphabet Learning");
         frame.setSize(600, 590);
         frame.getContentPane().setLayout(null);
         frame.getContentPane().setBackground(Color.black);
-        frame.setResizable(true);
+        frame.setResizable(false);
         frame.setLocationRelativeTo(null);
        
-        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     public void addComponents() {
@@ -110,6 +105,9 @@ public void closeThis()
         offRadioButton.setFont(new Font("Arial", Font.BOLD, 14));
         offRadioButton.setBackground(Color.black);
         offRadioButton.setForeground(Color.white);
+        offRadioButton.setOpaque(true);
+        offRadioButton.setBorderPainted(false);
+        
         frame.add(offRadioButton);
 
         ButtonGroup buttonGroup = new ButtonGroup();	// create group of two buttons ON & OFF
@@ -180,16 +178,15 @@ public void closeThis()
         //buttonV.setBackground(new Color(239, 188, 2));
         frame.add(buttonR);
         
-        buttonAns.setBounds(220, 110, 60, 40);
+        buttonAns.setBounds(220, 110, 70, 40);
         buttonAns.setFont(new Font("Arial", Font.BOLD, 12));
         buttonAns.setBackground(Color.red);
         buttonAns.setForeground(Color.white);
-        buttonAns.setOpaque(true);
+       buttonAns.setOpaque(true);
         buttonAns.setBorderPainted(false);
-        buttonAns.setText("Ans");
         frame.add(buttonAns);
 
-        buttonExit.setBounds(300, 110, 70, 40);
+        buttonExit.setBounds(300, 110, 90, 40);
         buttonExit.setFont(new Font("Arial", Font.BOLD, 20));
         buttonExit.setBackground(new Color(239, 188, 2));
         buttonExit.setOpaque(true);
@@ -209,26 +206,47 @@ public void closeThis()
         buttonM.setFont(new Font("Arial", Font.BOLD, 20));
        // buttonM.setBackground(new Color(239, 188, 2));
         frame.add(buttonM);
+        
+        buttonT.setBounds(290, 230, 60, 40);
+        buttonT.setFont(new Font("Arial", Font.BOLD, 20));
+       // buttonM.setBackground(new Color(239, 188, 2));
+        frame.add(buttonT);
 
         buttonL.setBounds(220, 170, 60, 40);
         buttonL.setFont(new Font("Arial", Font.BOLD, 20));
         //buttonL.setBackground(new Color(239, 188, 2));
         frame.add(buttonL);
-
+        
+        buttonS.setBounds(290, 170, 60, 40);
+        buttonS.setFont(new Font("Arial", Font.BOLD, 20));
+        //buttonL.setBackground(new Color(239, 188, 2));
+        frame.add(buttonS);
+        
         buttonK.setBounds(220, 290, 60, 40);
         buttonK.setFont(new Font("Arial", Font.BOLD, 20));
         //buttonK.setBackground(new Color(239, 188, 2));
         frame.add(buttonK);
-
-       /* buttonAns.setBounds(80, 170, 70, 40);
-        buttonAns.setFont(new Font("Arial", Font.BOLD, 20));
-        frame.add(buttonAns);*/
+        
+        buttonX.setBounds(80, 470, 60, 40);
+        buttonX.setFont(new Font("Arial", Font.BOLD, 20));
+        //buttonK.setBackground(new Color(239, 188, 2));
+        frame.add(buttonX);
+        
+        buttonZ.setBounds(220, 470, 60, 40);
+        buttonZ.setFont(new Font("Arial", Font.BOLD, 20));
+        //buttonK.setBackground(new Color(239, 188, 2));
+        frame.add(buttonZ);
+        
+        buttonY.setBounds(150, 470, 60, 40);
+        buttonY.setFont(new Font("Arial", Font.BOLD, 20));
+        //buttonK.setBackground(new Color(239, 188, 2));
+        frame.add(buttonY);
 
         buttonU.setBounds(150, 170, 60, 40);
         buttonU.setFont(new Font("Arial", Font.BOLD, 15));
         frame.add(buttonU);
         
-        buttonClear.setBounds(80, 110, 60, 40);
+        buttonClear.setBounds(80, 110, 70, 40);
         buttonClear.setFont(new Font("Arial", Font.BOLD, 12));
         buttonClear.setBackground(Color.red);
         buttonClear.setForeground(Color.white);
@@ -236,10 +254,12 @@ public void closeThis()
         buttonClear.setBorderPainted(false);
         frame.add(buttonClear);
 
-        buttonDelete.setBounds(150, 110, 60, 40);
+        buttonDelete.setBounds(150, 110, 70, 40);
         buttonDelete.setFont(new Font("Arial", Font.BOLD, 12));
         buttonDelete.setBackground(Color.red);
         buttonDelete.setForeground(Color.white);
+        buttonDelete.setOpaque(true);
+        buttonDelete.setBorderPainted(false);
         frame.add(buttonDelete);
         
         
@@ -277,6 +297,11 @@ public void closeThis()
         buttonQ.addActionListener(this);
         buttonR.addActionListener(this);
         buttonW.addActionListener(this);
+        buttonY.addActionListener(this);
+        buttonZ.addActionListener(this);
+        buttonS.addActionListener(this);
+        buttonT.addActionListener(this);
+        buttonX.addActionListener(this);
 
     }
   //Overriding actionPerformed() method
@@ -284,7 +309,7 @@ public void closeThis()
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         if(source == buttonExit){
-			frame.dispose();
+		frame.dispose();
 		}
         else if (source == onRadioButton) {
             enable();//Calling enable() function
@@ -354,13 +379,34 @@ public void closeThis()
     	 else if (source == buttonW) {
       		textField.setText(textField.getText() + "W");
       	}
+        
+    	 else if (source == buttonY) {
+       		textField.setText(textField.getText() + "Y");
+       	}
+        
+    	 else if (source == buttonZ) {
+        		textField.setText(textField.getText() + "Z");
+        	}
+    	 else if (source == buttonS) {
+     		textField.setText(textField.getText() + "S");
+     	}
+    	 else if (source == buttonT) {
+     		textField.setText(textField.getText() + "T");
+     	}
+    	 else if (source == buttonX) {
+      		textField.setText(textField.getText() + "X");
+      	}
     	else if (source == buttonAns) {
     
     		String str = textField.getText();
     		if( str.equals(alphaStr))
-           		textField2.setText("good job");
+           		textField2.setText("Good Job!");
+    		else if(str.length() < 26)
+    		{
+    			textField.setText("You need to input all of the 26 alphabet letters");
+    		}
            	else
-           		textField2.setText("Incorrect alphabet not in order");
+           		textField2.setText("Incorrect alphabet, not in order");
     	}
            // textField2.setText(str);
             
@@ -459,6 +505,11 @@ public void closeThis()
         buttonU.setEnabled(true);
         buttonV.setEnabled(true);
         buttonW.setEnabled(true);
+        buttonY.setEnabled(true);
+        buttonZ.setEnabled(true);
+        buttonS.setEnabled(true);
+        buttonT.setEnabled(true);
+        buttonX.setEnabled(true);
 
     }
 
@@ -492,9 +543,17 @@ public void closeThis()
         buttonQ.setEnabled(false);
         buttonR.setEnabled(false);
         buttonW.setEnabled(false);
+        buttonY.setEnabled(false);
+        buttonZ.setEnabled(false);
+        buttonS.setEnabled(false);
+        buttonT.setEnabled(false);
+        buttonX.setEnabled(false);
     }
 
-
+    public void closeThis()
+    {
+     frame.dispose();	
+    }
 //import javax.swing.*;
 
 /*public class MainClass {
